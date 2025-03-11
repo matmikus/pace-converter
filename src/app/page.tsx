@@ -25,7 +25,7 @@ export default function Home () {
                 <Col>
                     <Ad />
                 </Col>
-                <Col className={'d-flex flex-column min-vh-100 justify-content-center align-items-center'}>
+                <Col className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
                     <main>
                         <div style={styles.logo}>
                             <Logo />
