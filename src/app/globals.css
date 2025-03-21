@@ -1,15 +1,8 @@
 @import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 
 :root {
-    --background: #ffffff;
-    --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #0a0a0a;
-        --foreground: #ededed;
-    }
+    --background: #262673;
+    --foreground: #ededed;
 }
 
 html,
@@ -37,12 +30,6 @@ a {
     text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-    html {
-        color-scheme: dark;
-    }
-}
-
 .table-container {
     overflow: hidden;
     height: 200px;
@@ -64,6 +51,7 @@ td:first-child {
 td:last-child {
     width: 82px;
     height: 42px;
+    text-align: right;
 }
 
 .table-container:after {
@@ -72,7 +60,7 @@ td:last-child {
     top: 0;
     width: 100%;
     height: 16px;
-    background: linear-gradient(to top, rgba(255,255,255,0), black 75%);
+    background: linear-gradient(to top, rgba(255,255,255,0), #262673 75%);
     z-index: 1;
 }
 
@@ -82,6 +70,6 @@ td:last-child {
     bottom: 0;
     width: 100%;
     height: 16px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0), black 75%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0), #262673 75%);
     z-index: 1;
 }

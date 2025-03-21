@@ -1,15 +1,25 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 export default function Converter () {
     const [currentOption, setCurrentOptions] = useState(() => {
-        return '5';
+        return localStorage.getItem('option') || '5';
     });
     
+    useEffect(() => {
+        localStorage.setItem('option', currentOption);
+    }, [currentOption]);
+    
     const [isMetric, setCurrentMetric] = useState(() => {
-        return true;
+        const metric = localStorage.getItem('metric');
+        return metric !== 'false';
     });
+    
+    useEffect(() => {
+        localStorage.setItem('metric', isMetric.toString());
+    }, [isMetric]);
     
     const changeOptions = (option) => {
         setCurrentOptions(option);
@@ -42,15 +52,33 @@ export default function Converter () {
         }
     ];
     
+    const tableRef = React.createRef();
+    
+    const scrollEvent = (e) => {
+        const target = e.target as HTMLTextAreaElement;
+        const rows = Array.from(tableRef.current.querySelectorAll('tr'));
+        rows.forEach(el => {
+            el.style.fontWeight = '';
+            el.style.fontSize = 'unset';
+        });
+        rows[Math.floor((target.scrollTop + 82) / 42)].style.fontWeight = 'bold';
+        rows[Math.floor((target.scrollTop + 82) / 42)].style.fontSize = '120%';
+    };
+    
+    const Wrapper = styled.div`
+        display: block;
+    `;
+    
     return (
-        <div>
+        <Wrapper>
             <div className="d-flex justify-content-between">
-                <input type="radio"
-                       className="btn-check"
-                       name="metric-options"
-                       id="option1"
-                       autoComplete="off"
-                       onClick={() => toggleMetric(true)}
+                <input
+                    type="radio"
+                    className="btn-check"
+                    name="metric-options"
+                    id="option1"
+                    autoComplete="off"
+                    onClick={() => toggleMetric(true)}
                 />
                 <label className="btn btn-secondary" htmlFor="option1">kilometers</label>
                 <input
@@ -63,9 +91,11 @@ export default function Converter () {
                 />
                 <label className="btn btn-secondary" htmlFor="option2">miles</label>
             </div>
-            <select className="w-100 my-4"
-                    onChange={(event) => changeOptions(event.target.value)}
-                    value={currentOption}>
+            <select
+                className="w-100 my-4"
+                onChange={(event) => changeOptions(event.target.value)}
+                value={currentOption}
+            >
                 {
                     options.map((option) =>
                         <option key={option.value} value={option.value}>{option.name}</option>)
@@ -76,12 +106,12 @@ export default function Converter () {
                 <div>Time</div>
             </div>
             <div className="table-container">
-                <div className="table-scroller">
-                    <table className="table">
+                <div className="table-scroller" onScroll={scrollEvent}>
+                    <table className="table my-3" ref={tableRef}>
                         <tbody>
                             {
                                 options.find(el => el.value === currentOption).data.map((entity, indexKey) =>
-                                    <tr key={indexKey} className={indexKey % 2 ? '' : 'table-active'}>
+                                    <tr key={indexKey}>
                                         <td>{entity[isMetric ? 0 : 1]}</td>
                                         <td>{entity[2]}</td>
                                     </tr>
@@ -91,6 +121,6 @@ export default function Converter () {
                     </table>
                 </div>
             </div>
-        </div>
+        </Wrapper>
     );
 };

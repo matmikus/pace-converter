@@ -1,0 +1,36 @@
+.logo {
+    filter: invert();
+}
+
+.first-row {
+    font-size: 60px;
+    letter-spacing: 10px;
+    line-height: 0;
+    font-weight: 800;
+}
+
+.second-row {
+    font-size: 30px;
+    margin-top: -24px;
+    font-weight: 800;
+}
+
+@media (max-width: 767px) {
+    .logo {
+        height: 100px;
+        margin-bottom: 12px;
+    }
+
+    .first-row {
+        font-size: 36px;
+        letter-spacing: 10px;
+        line-height: 0;
+        font-weight: 800;
+    }
+
+    .second-row {
+        font-size: 20px;
+        margin-top: -24px;
+        font-weight: 800;
+    }
+}

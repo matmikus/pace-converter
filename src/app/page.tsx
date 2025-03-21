@@ -5,9 +5,10 @@ import Ad from '@/components/ad';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import moduleStyles from './page.module.scss';
 
 export default function Home () {
-    const styles = {
+    const localStyles = {
         logo: {
             margin: '24px'
         },
@@ -25,16 +26,16 @@ export default function Home () {
                 <Col>
                     <Ad />
                 </Col>
-                <Col className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+                <Col className={moduleStyles.content} md={3}>
                     <main>
-                        <div style={styles.logo}>
+                        <div style={localStyles.logo}>
                             <Logo />
                         </div>
-                        <div style={styles.converter}>
+                        <div style={localStyles.converter}>
                             <Converter />
                         </div>
                     </main>
-                    <footer style={styles.footer}>
+                    <footer style={localStyles.footer}>
                         <Coffee />
                     </footer>
                 </Col>

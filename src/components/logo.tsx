@@ -1,27 +1,11 @@
 import Image from 'next/image';
+import './logo.css';
 
 export default function Logo () {
-    const styles = {
-        logo: {
-            filter: 'invert()'
-        },
-        firstRow: {
-            fontSize: '60px',
-            letterSpacing: '10px',
-            lineHeight: '0',
-            fontWeight: '800'
-        },
-        secondRow: {
-            fontSize: '30px',
-            marginTop: '-24px',
-            fontWeight: '800'
-        }
-    };
-    
     return (
-        <div>
+        <div className={'d-flex flex-column align-items-center'}>
             <Image
-                style={styles.logo}
+                className={'logo'}
                 src="/logo.svg"
                 alt="logo"
                 width={200}
@@ -29,9 +13,9 @@ export default function Logo () {
                 priority
             />
             <h1>
-                <div style={styles.firstRow}>PACE</div>
+                <div className={'first-row'}>PACE</div>
                 <br />
-                <div style={styles.secondRow}>CONVERTER</div>
+                <div className={'second-row'}>CONVERTER</div>
             </h1>
         </div>
     );
