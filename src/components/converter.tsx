@@ -4,28 +4,50 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 export default function Converter () {
-    const [currentOption, setCurrentOptions] = useState(() => {
-        return localStorage.getItem('option') || '5';
-    });
+    // const [currentOption, setCurrentOptions] = useState(() => {
+    //     return localStorage.getItem('option') || '5';
+    // });
+    //
+    // useEffect(() => {
+    //     localStorage.setItem('option', currentOption);
+    // }, [currentOption]);
+    //
+    // const [isMetric, setCurrentMetric] = useState(() => {
+    //     const metric = localStorage.getItem('metric');
+    //     return metric !== 'false';
+    // });
+    //
+    // useEffect(() => {
+    //     localStorage.setItem('metric', isMetric.toString());
+    // }, [isMetric]);
+    
+    const [currentOption, setCurrentOptions] = useState('5');
     
     useEffect(() => {
-        localStorage.setItem('option', currentOption);
+        const savedValue = window.localStorage.getItem("option");
+        setCurrentOptions(savedValue || '5');
+    }, []);
+    
+    useEffect(() => {
+        window.localStorage.setItem("option", currentOption);
     }, [currentOption]);
     
-    const [isMetric, setCurrentMetric] = useState(() => {
-        const metric = localStorage.getItem('metric');
-        return metric !== 'false';
-    });
+    const [isMetric, setCurrentMetric] = useState(true);
     
     useEffect(() => {
-        localStorage.setItem('metric', isMetric.toString());
+        const savedValue = window.localStorage.getItem("metric") !== 'false';
+        setCurrentMetric(savedValue || true);
+    }, []);
+    
+    useEffect(() => {
+        window.localStorage.setItem("metric", isMetric.toString());
     }, [isMetric]);
     
-    const changeOptions = (option) => {
+    const changeOptions = (option: string) => {
         setCurrentOptions(option);
     };
     
-    const toggleMetric = (value) => {
+    const toggleMetric = (value: boolean) => {
         setCurrentMetric(value);
     };
     
@@ -53,10 +75,11 @@ export default function Converter () {
     ];
     
     const tableRef = React.createRef();
+    const tableScroller = React.createRef();
     
-    const scrollEvent = (e) => {
-        const target = e.target as HTMLTextAreaElement;
-        const rows = Array.from(tableRef.current.querySelectorAll('tr'));
+    const scrollEvent = () => {
+        const target = (tableScroller.current as HTMLElement);
+        const rows = Array.from((tableRef.current as HTMLElement).querySelectorAll('tr'));
         rows.forEach(el => {
             el.style.fontWeight = '';
             el.style.fontSize = 'unset';
@@ -106,11 +129,11 @@ export default function Converter () {
                 <div>Time</div>
             </div>
             <div className="table-container">
-                <div className="table-scroller" onScroll={scrollEvent}>
-                    <table className="table my-3" ref={tableRef}>
+                <div className="table-scroller" onScroll={scrollEvent} ref={tableScroller as React.RefObject<HTMLDivElement>}>
+                    <table className="table my-3" ref={tableRef as React.RefObject<HTMLTableElement>}>
                         <tbody>
                             {
-                                options.find(el => el.value === currentOption).data.map((entity, indexKey) =>
+                                options.find(el => el.value === currentOption)?.data.map((entity, indexKey) =>
                                     <tr key={indexKey}>
                                         <td>{entity[isMetric ? 0 : 1]}</td>
                                         <td>{entity[2]}</td>
