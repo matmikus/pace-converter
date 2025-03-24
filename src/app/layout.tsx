@@ -28,7 +28,13 @@ export default function RootLayout ({
     return (
         <html lang="en">
             <body className={`${geistSans.variable} ${geistMono.variable}`}>
+                <script async
+                        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8268924616638413"
+                        crossOrigin="anonymous"></script>
                 {children}
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </body>
         </html>
     );

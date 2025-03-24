@@ -2,6 +2,7 @@ import Logo from '@/components/logo';
 import Converter from '@/components/converter';
 import Coffee from '@/components/coffee';
 import Ad from '@/components/ad';
+import Ad2 from '@/components/ad2';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -40,7 +41,7 @@ export default function Home () {
                     </footer>
                 </Col>
                 <Col>
-                    <Ad />
+                    <Ad2 />
                 </Col>
             </Row>
         </Container>
