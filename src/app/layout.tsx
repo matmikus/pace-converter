@@ -14,7 +14,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: 'Pace Converter - running app - convert time to pace',
-    description: 'Ultra simple running pace converter app. Convert time to pace and pace to time to know results in 5k, 10k, half marathon and full marathon.'
+    description: 'Ultra simple running pace converter app. Convert time to pace and pace to time to know results in 5k, 10k, half marathon and full marathon.',
+    other: {
+        'google-adsense-account': 'ca-pub-8268924616638413'
+    }
 };
 
 export default function RootLayout ({
