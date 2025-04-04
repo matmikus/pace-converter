@@ -1,4 +1,9 @@
+import { useContext } from 'react';
+import { LangContext } from '@/context/lang-context';
+
 export default function Coffee () {
+    const lang = useContext(LangContext);
+    
     return (
         <div style={{ width: '100%', 'maxWidth': '400px', 'fontFamily': 'Arial, sans-serif' }}>
             <div style={{
@@ -11,8 +16,10 @@ export default function Coffee () {
                 color: '#000000DE',
                 'textAlign': 'center'
             }}>
-                <h3 style={{ 'fontSize': '13px', 'fontWeight': '600', 'lineHeight': '1.5', margin: '0' }}> Postaw
-                    kawę za: </h3></div>
+                <h3 style={{ 'fontSize': '13px', 'fontWeight': '600', 'lineHeight': '1.5', margin: '0' }}>
+                    { lang === 'pl' ? 'Postaw kawę za: ' : 'Buy me a coffee' }
+                </h3>
+            </div>
             <div style={{ display: 'flex', gap: '8px', 'marginTop': '12px', 'justifyContent': 'center' }}>
                 <a href="https://buycoffee.to/matmikus?coffeeSize=small"
                    style={{
