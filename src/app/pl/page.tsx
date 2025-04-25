@@ -8,7 +8,7 @@ import Ad2 from '@/components/ad2';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import moduleStyles from './page.module.scss';
+import moduleStyles from './../page.module.scss';
 import { LangContext } from '@/context/lang-context';
 
 export default function Home () {
@@ -24,8 +24,6 @@ export default function Home () {
         }
     };
     
-    const lang = navigator?.language?.startsWith('pl') ? 'pl' : 'en';
-    
     return (
         <Container fluid>
             <Row>
@@ -33,7 +31,7 @@ export default function Home () {
                     <Ad />
                 </Col>
                 <Col className={moduleStyles.content} md={3}>
-                    <LangContext.Provider value={lang}>
+                    <LangContext.Provider value={'pl'}>
                         <main>
                             <div style={localStyles.logo}>
                                 <Logo />

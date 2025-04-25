@@ -18,22 +18,22 @@ export default function Converter () {
         window.localStorage.setItem('option', currentOption);
     }, [currentOption]);
     
-    const [isMetric, setCurrentMetric] = useState(true);
+    const [isMetric, setCurrentMetric] = useState('km');
     
     useEffect(() => {
-        const savedValue = window.localStorage.getItem('metric') !== 'false';
-        setCurrentMetric(savedValue || true);
+        const savedValue = window.localStorage.getItem('metric');
+        setCurrentMetric(savedValue || 'km');
     }, []);
     
     useEffect(() => {
-        window.localStorage.setItem('metric', isMetric.toString());
+        window.localStorage.setItem('metric', isMetric);
     }, [isMetric]);
     
     const changeOptions = (option: string) => {
         setCurrentOptions(option);
     };
     
-    const toggleMetric = (value: boolean) => {
+    const setMetric = (value: string) => {
         setCurrentMetric(value);
     };
     
@@ -87,7 +87,7 @@ export default function Converter () {
                     name="metric-options"
                     id="option1"
                     autoComplete="off"
-                    onClick={() => toggleMetric(true)}
+                    onClick={() => setMetric('km')}
                 />
                 <label className="btn btn-secondary" htmlFor="option1">{lang === 'pl' ? 'kilometry' : 'kilometers'}</label>
                 <input
@@ -96,7 +96,7 @@ export default function Converter () {
                     name="metric-options"
                     id="option2"
                     autoComplete="off"
-                    onClick={() => toggleMetric(false)}
+                    onClick={() => setMetric('mi')}
                 />
                 <label className="btn btn-secondary" htmlFor="option2">{lang === 'pl' ? 'mile' : 'miles'}</label>
             </div>
@@ -111,7 +111,7 @@ export default function Converter () {
                 }
             </select>
             <div className="d-flex justify-content-between mx-2">
-                <div>{lang === 'pl' ? 'Tempo' : 'Pace'} {isMetric ? 'min/km' : 'min/mi'}</div>
+                <div>{lang === 'pl' ? 'Tempo' : 'Pace'} {isMetric === 'km' ? 'min/km' : 'min/mi'}</div>
                 <div>{lang === 'pl' ? 'Czas' : 'Time'}</div>
             </div>
             <div className="table-container">
@@ -123,7 +123,7 @@ export default function Converter () {
                             {
                                 options.find(el => el.value === currentOption)?.data.map((entity, indexKey) =>
                                     <tr key={indexKey}>
-                                        <td>{entity[isMetric ? 0 : 1]}</td>
+                                        <td>{entity[isMetric === 'km' ? 0 : 1]}</td>
                                         <td>{entity[2]}</td>
                                     </tr>
                                 )
